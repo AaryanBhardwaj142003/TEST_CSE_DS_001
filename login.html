@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .form1{
+            border: 2px solid gray;
+            box-shadow: 2px;
+            /* display: flex; */
+            height: 250px;
+            width: 75%;
+            background: rgb(237, 235, 235);
+            margin: auto;
+            margin-top: 10%;
+        }
+        
+        .input1{
+            margin-left: 20px;
+            border-radius: 5px;
+            width: 90%;
+            height: 15%;
+        }
+
+        .btn{
+            color: white;
+            background: green;
+            margin-left: 20px;
+            border-radius: 5px;
+            height: 15%;
+            width: 10%;
+
+        }
+
+        .headinh{
+        margin-left: 20px;
+    }
+    </style>
+
+   
+</head>
+<body>
+    <form class="form1">
+        <h1 class="headinh">LOGIN</h1>
+        <input type="text" placeholder="Username" class="input1">
+        <br><br>
+        <input type="text" placeholder="Password" class="input1">
+        <br><br>
+        <button class="btn">Login</button>
+    </form>
+    <script>
+        const users = [{ username: "testuser", password: "password123" }];
+
+document
+  .getElementById("form1")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const username = event.target.username.value;
+    const password = event.target.password.value;
+    const messageElement = document.getElementById("loginMessage");
+
+    const user = users.find(
+      (user) => user.username === username && user.password === password
+    );
+
+    if (user) {
+      messageElement.textContent = "Login successful!";
+      messageElement.style.color = "green";
+
+      setTimeout(() => {
+        document.getElementById("loginContainer").style.display = "none";
+        document.getElementById("dashboardContainer").style.display = "block";
+        document.getElementById(
+          "welcomeMessage"
+        ).textContent = `Welcome, ${username}`;
+      }, 1000);
+    } else {
+      messageElement.textContent = "Invalid username or password";
+      messageElement.style.color = "red";
+    }
+  });
+
+    </script>
+</body>
+</html>

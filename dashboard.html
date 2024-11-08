@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .btn{ 
+            color: white;
+            background: #28a745;
+            height: 12%;
+            border-radius: 5px;
+            margin: 2px;
+        }
+        .logout{
+            background: #dc3545;
+            color: white;
+            height: 10%;
+        }
+        .heading{
+            height: 50%;
+            width: 75%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin: auto;
+        }
+        .heading>h1{
+            color: #28a745;
+            background: yellow;
+        }
+        .heading>h2{
+            color: #28a745;   
+        }
+        .content{
+            height: 350px;
+            width: 90%;
+            margin: auto;
+            background: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="heading">
+            <h1>DASHBOARD</h1>
+            <h2>WELCOME ABHIESHEK</h2>
+        </div>
+        <div class="content">
+            <button class="btn" onclick="displayUsers()">Fetch Top 10 Github users</button>
+            <select name="sort" id="sorted">
+                <option value="default">Default</option>
+                <option value="alphabatical">Alphabatical</option>         
+              </select>
+            <div id="mai"></div>
+            <button class="logout">Logout</button>
+        </div>
+    </div>
+    <script>
+        const main=document.getElementById("mai")
+        const val=document.getElementById("sorted").value 
+        console.log(val)
+
+        async function displayUsers(){
+        const data=await fetch("https://api.github.com/users")
+        const rest=await data.json()
+        let res=[]
+        for(let i=0;i<11;i++){
+            res[i]=rest[i]
+        }
+        let list=document.createElement("ul")
+        let item=document.createElement("li")
+        res.map((data)=>{
+            let item=document.createElement("li")
+            item.innerHTML=`<a>${data.login}</a>`
+            list.appendChild(item)
+        })
+        main.appendChild(list)
+        }
+
+
+    </script>
+</body>
+</html>
